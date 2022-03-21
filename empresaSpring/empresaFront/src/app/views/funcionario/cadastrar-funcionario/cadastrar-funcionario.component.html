@@ -1,0 +1,320 @@
+<app-navbar></app-navbar>
+<div class="container w-100 my-5">
+  <h3 class="text-center title mt-5 mb-3">Cadastrar Funcionário</h3>
+  <div class="card" >
+    <form class="p-3" #f="ngForm" (ngSubmit)="cadastrarFuncionario(f.value)">
+      <div class="row">
+        <div class="col col-lg-6 col-md-12">
+          <div class="mb-3">
+            <label class="form-label">Nome</label>
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="funcionario.func_nome"
+              name="func_nome"
+              #func_nome="ngModel"
+              minlength="3"
+              maxlength="100"
+              required=""
+            />
+            <div class="text-danger fs-6">
+              <span *ngIf="func_nome.errors?.['required']">*Campo obrigatório</span>
+              <span *ngIf="func_nome.errors?.['minlength']">Mínimo 3 caracters</span>
+            </div>
+          </div>
+        </div>
+        <div class="col col-lg-3 col-md-12">
+          <div class="mb-3">
+            <label class="form-label">CPF</label>
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="funcionario.func_cpf"
+              name="func_cpf"
+              #func_cpf="ngModel"
+              minlength="11"
+              maxlength="11"
+              required
+              placeholder="Só digite números"
+              pattern="(\d{3})[.]?(\d{3})[.]?(\d{3})[-]?(\d{2})"
+          
+            />
+            <div class="text-danger fs-6">
+              <span *ngIf="func_cpf.errors?.['required']">*Campo obrigatório</span>
+             <span *ngIf="func_cpf.errors?.['minlength']" >O CPF é composto por 11 digitos</span>
+             <span *ngIf="func_cpf.errors?.['pattern']" class="m-3">CPF inválido</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col col-lg-3 col-md-12">
+          <div class="mb-3">
+            <label class="form-label">Data Nascimento</label>
+            <input
+              type="date"
+              class="form-control"
+              [(ngModel)]="funcionario.func_nascimento"
+              name="func_nascimento"
+              #func_nascimento="ngModel"
+              required
+            />
+            <div class="text-danger fs-6">
+              <span *ngIf="func_nascimento.errors?.['required']">*Campo obrigatório</span>
+          </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col col-lg-6 col-md-12">
+          <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input
+              type="email"
+              class="form-control"
+              [(ngModel)]="funcionario.func_email"
+              name="func_email"
+              #func_email="ngModel"
+              required
+              pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+            />
+            <div class="text-danger fs-6">
+              <span *ngIf="func_email.errors?.['required']">*Campo obrigatório</span>
+             <span *ngIf="func_email.errors?.['pattern']">Email inválido</span>
+            </div>
+          </div>
+        </div>
+        <div class="col col-lg-6 col-md-12">
+          <div class="mb-3">
+            <label class="form-label">Telefone</label>
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="funcionario.func_telefone"
+              name="func_telefone"
+              #func_telefone="ngModel"
+              required
+              placeholder="Só digite números"
+              pattern="^((\\+91-?)|0)?[0-9]{11}"
+              maxlength="11"
+            />
+            <div class="text-danger fs-6">
+              <span *ngIf="func_telefone.errors?.['required']">*Campo obrigatório</span>
+             <span *ngIf="func_telefone.errors?.['pattern']">Telefone inválido</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col col-lg-4 col-md-12">
+          <label class="form-label">CEP</label>
+          <div class="d-flex">
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="funcionario.cep"
+              name="cep"
+              #cep="ngModel"
+              required
+              maxlength="9"
+              placeholder="Só digite números"
+
+            />
+            <button class="btn btn-dark btn-md" type="button" (click)="atribuir()">OK</button>
+          </div>
+          <div class="text-danger fs-6 mb-3">
+            <span *ngIf="cep.errors?.['required']">*Campo obrigatório</span>
+            <!-- <span *ngIf="cep.errors?.['pattern']">CEP inválido</span> -->
+          </div>
+        </div>
+        <div class="col col-lg-4 col-md-12">
+          <div class="mb-3">
+            <label class="form-label">Cidade</label>
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="funcionario.localidade"
+              name="localidade"
+              #localidade="ngModel"
+              required=""
+            />
+            <div class="text-danger fs-6 mb-3">
+              <span *ngIf="localidade.errors?.['required']">*Campo obrigatório</span>
+            </div>
+          </div>
+        </div>
+        <div class="col col-lg-4 col-md-12">
+          <div class="mb-3">
+            <label class="form-label">Estado</label>
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="funcionario.uf"
+              name="uf"
+              #uf="ngModel"
+              required
+            />
+            <div class="text-danger fs-6 mb-3">
+              <span *ngIf="uf.errors?.['required']">*Campo obrigatório</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col col-lg-8 col-md-12">
+          <div class="mb-3">
+            <label class="form-label">Rua/Travessa/Avenida</label>
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="funcionario.logradouro"
+              name="logradouro"
+              #logradouro="ngModel"
+              required
+            />
+            <div class="text-danger fs-6 mb-3">
+              <span *ngIf="logradouro.errors?.['required']">*Campo obrigatório</span>
+            </div>
+          </div>
+        </div>
+        <div class="col col-lg-4 col-md-12">
+          <div class="mb-3">
+            <label class="form-label">Número</label>
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="funcionario.numero"
+              name="numero"
+              #numero="ngModel"
+              required
+            />
+            <div class="text-danger fs-6 mb-3">
+              <span *ngIf="numero.errors?.['required']">*Campo obrigatório</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col col-lg-6 col-md-12">
+          <div class="mb-3">
+            <label class="form-label">Bairro</label>
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="funcionario.bairro"
+              name="bairro"
+              #bairro="ngModel"
+              required
+            />
+            <div class="text-danger fs-6 mb-3">
+              <span *ngIf="bairro.errors?.['required']">*Campo obrigatório</span>
+            </div>
+          </div>
+        </div>
+        <div class="col col-lg-6 col-md-12">
+          <div class="mb-3">
+            <label class="form-label">Referência</label>
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="funcionario.func_referencia"
+              name="func_referencia"
+              #func_referencia="ngModel"
+            />
+          </div>
+        </div>
+        <div class="mt-3">
+          <button
+            #cadastrar
+            [disabled]="!f.valid"
+            class="btn btn-success me-3"
+          >
+            Cadastrar
+          </button>
+          <button type="reset" class="btn btn-dark me-3">Limpar</button>
+          <button
+            routerLink="/funcionarioCargo/{{ id_cargo }}"
+            class="btn btn-dark"
+          >
+            Cancelar
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div  *ngIf="isModal">
+    <div class="myModal w-50 mx-auto " style="height: 50%">
+      <div class="tituloModal" >
+        <legend class="form-label fs-3 fw-bolder">Foto</legend>
+        <div *ngIf="funcionario.func_foto; then fotoDefault; else fotoFunc;"> </div>
+        <ng-template #fotoFunc>
+        <img src="assets/img/foto.png" alt="..." style="width:150px; height:150px;" class="border border-success border-3 rounded-3 mb-5 p-1 img-fluid" name="func_foto" (change)="subirFoto($event)">
+        </ng-template>
+        <ng-template #fotoDefault >
+          <img src="{{func_foto}}" alt="..." style="width:150px; height:150px;" class="border border-success border-3 rounded-3 mb-5 p-1 img-fluid" name="func_foto" (change)="subirFoto($event)">
+       </ng-template>
+        <input
+          type="file"
+          class="form-control"
+          [(ngModel)]="funcionario.func_foto"
+          name="func_foto"
+          (change)="subirFoto($event)"
+        />
+      </div>
+      <button
+        class="btn btn-modal"
+        routerLink="/funcionarioCargo/{{ id_cargo }}"
+      >
+        OK
+      </button>
+      <button class="btn  btn-modal" (click)="cancelarAcao()">Sair</button>
+    </div>
+  </div>
+</div>
+
+<div class="fixed-top">
+  <div
+    *ngIf="cadastrado"
+    class="alert alert-success w-75 text-center m-auto"
+    role="alert"
+  >
+    Funcionário Cadastrado no Cargo!<i
+      (click)="fechar()"
+      class="fa-solid fa-rectangle-xmark fs-1 float-end"
+      style="cursor: pointer"
+    ></i>
+  </div>
+  <div
+    *ngIf="error"
+    class="alert alert-danger w-75 text-center m-auto"
+    role="alert"
+  >
+    Erro!Não foi possível cadastrar este funcionário.<i
+      (click)="fechar()"
+      class="fa-solid fa-rectangle-xmark fs-1 float-end"
+      style="cursor: pointer"
+    ></i>
+  </div>
+  <div
+    *ngIf="anexada"
+    class="alert alert-danger w-75 text-center m-auto"
+    role="alert"
+  >
+    Foto anexada!<i
+      (click)="fechar()"
+      class="fa-solid fa-rectangle-xmark fs-1 float-end"
+      style="cursor: pointer"
+    ></i>
+  </div>
+  <div
+    *ngIf="erro"
+    class="alert alert-danger w-75 text-center m-auto"
+    role="alert"
+  >
+    Erro!Não foi possível anexar a foto.<i
+      (click)="fechar()"
+      class="fa-solid fa-rectangle-xmark fs-1 float-end"
+      style="cursor: pointer"
+    ></i>
+  </div>
+</div>

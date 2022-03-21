@@ -1,0 +1,68 @@
+<app-navbar></app-navbar>
+<div class="container mt-3 p-5">
+  <div  class="d-flex justify-content-between">
+    <h3 class="text-start  mb-3 ">Ficha Individual</h3>
+    <h4 class="h3 bg-success p-1 rounded-3 text-white fw-bold">{{func_nome}}</h4>
+  </div>
+  <hr>
+   <div *ngIf="funcionario">
+    <div class=" card  p-2  mb-5 fs-5" >
+      <div class="d-flex justify-content-center">
+        <div class="row" >
+         <div class="col-lg-12">
+              <img src="{{funcionario.func_foto}}" alt="..." style="width:200px; height:200px;" class="border border-success rounded-3 mb-5 p-1 img-fluid">
+         </div>
+        </div>
+      </div>
+    <div clas="d-flex justify-content-between">
+      <div class="row">
+        <div class="col-lg-12 ">
+          <ul >
+            <li>Identificação Interna: {{funcionario.id_funcionario}}</li>
+            <li>Nome: {{funcionario.func_nome}}</li>
+           <div >
+            <li> Cargo: {{this.ca_nome}}</li>
+            <li>Atribuição do Cargo: {{this.atribuicao}}</li>
+           </div>
+          </ul>
+        </div>
+         <div class="col-lg-12">
+          <ul>
+            <li>CPF: {{funcionario.func_cpf}}</li>
+            <li>Data de Nascimento: {{funcionario.func_nascimento | date: "dd/MM/yyyy"}}</li>
+            <li>Telefone: {{funcionario.func_telefone}}</li>
+            <li>Email: {{funcionario.func_email}} </li>
+           </ul>
+         </div>
+      </div>
+    </div>
+   <div class="d-flex justify-content-between">
+    <div class="row">
+      <div class="col-lg-12">
+        <ul>
+          <li>CEP: {{funcionario.cep}}</li>
+          <li>Cidade: {{funcionario.localidade}}</li>
+          <li>Rua: {{funcionario.logradouro}}</li>
+          <li>Número: {{funcionario.numero}}</li>
+        </ul>
+      </div>
+      <div class="col-lg-12">
+        <ul>
+          <li>Referência: {{funcionario.func_referencia}}</li>
+          <li>Bairro: {{funcionario.bairro}}</li>
+          <li>Estado: {{funcionario.uf}}</li>
+        </ul>
+      </div>
+   </div>
+   </div>
+
+   <button class="btn mx-1 btn-modal " routerLink="/listarCargos">OK</button>
+</div>
+
+</div>
+
+
+
+
+
+

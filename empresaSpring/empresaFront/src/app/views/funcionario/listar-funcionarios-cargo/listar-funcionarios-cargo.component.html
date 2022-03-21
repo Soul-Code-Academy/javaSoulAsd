@@ -1,0 +1,62 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <div class="search-box float-end">
+    <input type="text" [(ngModel)] = "search" >
+    <button class="btn-search" type="reset" (click)="resetSearch()"></button>
+  </div>
+  <h3 class="mt-5 mb-3 ">Funcionários</h3>
+  <hr>
+  <div class="table-responsive" >
+    <table class="table table-hover table-borderless">
+      <thead>
+        <tr>
+          <th scope="col">Identificação</th>
+          <th scope="col">Nome</th>
+          <th scope="col">CPF</th>
+          <th scope="col">Data de Nascimento</th>
+          <th scope="col">Cidade</th>
+          <th scope="col">Foto</th>
+          <th scope="col">Contra Cheques</th>
+          <th scope="col">Editar/Excluir</th>
+          <th scope="col"><a routerLink="/cadastrarFuncionario/{{id_cargo}}"  class="btn btn-dark" title="Cadastrar Funcionário"><i class="fa-solid fa-square-pen"></i></a>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let funcionario of funcionarios | filter: search"  class="fs-5">
+          <th scope="row">{{funcionario.id_funcionario}}</th>
+          <td>{{funcionario.func_nome}}</td>
+          <td>{{funcionario.func_cpf}}</td>
+          <td>{{funcionario.func_nascimento | date:"dd/MM/yyyy"}}</td>
+          <td>{{funcionario.localidade}}</td>
+          <td><img src="{{funcionario.func_foto}}" alt="" class="img-fluid" style="width: 30%; cursor: pointer;"  routerLink="/listarDadosUnitario/{{funcionario.id_funcionario}}" ></td>
+          <td>
+            <a  routerLink="/listarContraCheque/{{funcionario.id_funcionario}}" class="btn btn-dark me-3"><i class="fa-solid fa-coins"></i></a>
+          </td>
+          <td>
+            <a  routerLink="/editarFuncionario/{{funcionario.id_funcionario}}/{{id_cargo}}" class="btn btn-success me-3" title="Editar Dados"><i class="fa-solid fa-pen-to-square"></i></a>
+            <a  (click)="mostrarModal(funcionario.id_funcionario)" class="btn btn-danger "><i class="fa-solid fa-trash-can" title="Excluir Funcionário"></i></a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  </div>
+  <div *ngIf = 'isModal'>
+    <div class="myModal" *ngFor="let func of funcionarios">
+
+      <img src="{{func.func_foto}}" class="card-img-top" alt="..."  style="width: 20%;">
+      <legend>{{func.func_nome}}</legend>
+
+      <div class="tituloModal">
+        <h3 class="fs-3 fw-bolder">Atenção!</h3>
+      </div>
+      <h4 class="my-4 fs-4">Confirma exclusão do funcionário?</h4>
+      <button class="btn mx-1 btn-modal" (click)="cancelarAcao()">Não</button>
+      <button class="btn btn-modal" (click)="excluirFuncionario()">Sim</button>
+    </div>
+  </div>
+ <div class="fixed-top">
+  <div *ngIf="deletado" class="alert alert-danger w-75 text-center m-auto" role="alert">Funcionário excluído com sucesso!<i (click)="fechar()" class="fa-solid fa-rectangle-xmark fs-1 float-end" style="cursor: pointer;"></i></div>
+  <div *ngIf="error" class="alert alert-danger w-75 text-center m-auto" role="alert">Não foi possível excluir este funcionário.<i (click)="fechar()" class="fa-solid fa-rectangle-xmark fs-1 float-end" style="cursor: pointer;"></i></div>
+ </div>

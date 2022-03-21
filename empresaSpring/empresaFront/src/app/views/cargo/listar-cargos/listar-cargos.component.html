@@ -1,0 +1,66 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <div class="search-box float-end">
+    <input type="text" [(ngModel)] = "search" >
+    <button class="btn-search" type="reset" (click)="resetSearch()"></button>
+  </div>
+  <h3 class="text-start mt-5 mb-2">Cargos</h3>
+  <hr>
+  <div class="table-responsive" >
+    <table class="table table-hover table-borderless">
+      <thead>
+        <tr>
+          <th scope="col">Identificação</th>
+          <th scope="col">Nome do Cargo</th>
+          <th scope="col">Atribuição do Cargo</th>
+          <th scope="col">Funcionários</th>
+          <th scope="col">Departamentos</th>
+          <th scope="col">Editar/Excluir</th>
+          <th scope="col"><a routerLink="/cadastrarCargo" class="btn btn-dark" title="Cadastrar Cargo"><i class="fa-solid fa-square-pen"></i></a>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let cargo of cargos | filter: search" class="fs-5">
+          <th scope="row">{{cargo.id_cargo}}</th>
+          <td>{{cargo.ca_nome}}</td>
+          <td>{{cargo.ca_atribuicao}}</td>
+          <td> <a routerLink="/funcionarioCargo/{{cargo.id_cargo}}" class="btn btn-dark"> <i class="fa-solid fa-user" title="Listar funcionários desse cargo"></i></a></td>
+
+          <td> <a routerLink="/departamentoCargo/{{cargo.id_cargo}}" class="btn btn-dark"> <i class="fa-solid fa-warehouse" title="Listar departamento desse cargo"></i></a></td>
+
+          <td>
+            <a  routerLink="/editarCargo/{{cargo.id_cargo}}" class="btn btn-success me-3" title="Editar Dados"><i class="fa-solid fa-pen-to-square"></i></a>
+
+            <a  (click)="mostrarModal(cargo.id_cargo)" class="btn btn-danger"><i class="fa-solid fa-trash-can" title="Excluir Cargo"></i></a>
+          </td>
+
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div *ngIf = 'isModal'>
+  <div class="myModal w-25" *ngFor="let cargo of cargos ">
+    <div class="tituloModal">
+      <h3 class="fs-3 fw-bolder">Atenção!</h3>
+    </div>
+   <h4 class="my-3 fs-4 p-2 text-light">Confirma exclusão do cargo?</h4>
+    <div class="text-start mb-3 ">
+      <ul class="fs-5">
+        <li>Nome do Cargo:</li>
+        <span>{{cargo.ca_nome}}</span>
+        <li>Atribuição do Cargo:</li>
+        <span>{{cargo.ca_atribuicao}}</span>
+      </ul>
+    </div>
+    <button class="btn mx-1 btn-modal" (click)="cancelarAcao()">Não</button>
+    <button class="btn btn-modal" (click)="excluirCargo()">Sim</button>
+  </div>
+</div>
+<div class="fixed-top">
+  <div *ngIf="deletado" class="alert alert-danger w-75 text-center m-auto" role="alert">Cargo excluído.<i (click)="fechar()" class="fa-solid fa-rectangle-xmark fs-1 float-end" style="cursor: pointer;"></i></div>
+  <div *ngIf="error" class="alert alert-danger w-75 text-center m-auto" role="alert">Este cargo possui funcionários associados e não pode ser excluído!<i (click)="fechar()" class="fa-solid fa-rectangle-xmark fs-1 float-end" style="cursor: pointer;"></i></div>
+</div>
+

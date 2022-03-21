@@ -1,0 +1,16 @@
+footer{
+  background-color: var(--color1) !important;
+  color: #fff;
+  font-size: var(--fontSize1);
+}
+
+footer a {
+  text-decoration: none;
+  color: #fff;
+  font-size: var(--fontSize1);
+}
+
+hr{
+  border: 5px solid var(--color2);
+  height: 2rem;
+}

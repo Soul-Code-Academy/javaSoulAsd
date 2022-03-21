@@ -1,0 +1,57 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <div class="search-box float-end">
+    <input type="text" [(ngModel)]= "search" >
+    <button class="btn-search" type="reset" (click)="resetSearch()"></button>
+  </div>
+  <h3 class="text-start mt-5 mb-3 ">Todos Departamentos</h3>
+  <hr>
+  <div class="table-responsive" >
+    <table class="table table-hover table-borderless">
+      <thead>
+        <tr>
+          <th scope="col">Identificação</th>
+          <th scope="col">Departamento</th>
+          <!-- <th scope="col">Funcionário</th> -->
+          <th scope="col">Cargo</th>
+          <th scope="col">Atribuição</th>
+          <th scope="col">Editar/Excluir</th>
+          <th scope="col"><a routerLink="/cargoDepartamento/{{id_cargo}}"  class="btn btn-dark" title="Cadastrar Departamento"><i class="fa-solid fa-square-pen"></i></a>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let departamento of departamentos | filter: search" class="fs-5">
+          <th scope="row">{{departamento.id_departamento}}</th>
+          <td>{{departamento.dep_nome}}</td>
+          <!-- <td>{{departamento.func_nome}}</td> -->
+          <td>{{departamento.ca_nome}}</td>
+          <td>{{departamento.ca_atribuicao}}</td>
+          <td>
+            <a  routerLink="/editarDepartamento/{{departamento.id_departamento}}" class="btn btn-success me-3" title="Editar Dados"><i class="fa-solid fa-pen-to-square"></i></a>
+            <a  (click)="mostrarModal(departamento.id_departamento)" class="btn btn-danger "><i class="fa-solid fa-trash-can" title="Excluir Departamento"></i></a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div *ngIf = 'isModal'>
+    <div class="myModal p-2"*ngFor="let departamento of departamentos ">
+      <div class="tituloModal">
+        <h3 class="fs-3 fw-bolder">Atenção!</h3>
+      </div>
+      <h4 class="my-4 fs-3">Confirma exclusão do departamento?</h4>
+      <p class="fs-3">{{departamento.dep_nome}}</p>
+      <button class="btn mx-1 btn-modal" (click)="cancelarAcao()">Não</button>
+      <button class="btn btn-modal" (click)="excluirDepartamento()">Sim</button>
+    </div>
+  </div>
+  <div class="fixed-top">
+    <div *ngIf="deletado" class="alert alert-danger w-75 text-center mx-auto " role="alert">Departamento excluído.<i (click)="fechar()" class="fa-solid fa-rectangle-xmark fs-1 float-end" style="cursor: pointer;"></i></div>
+    <div *ngIf="error" class="alert alert-danger w-75 text-center mx-auto " role="alert">Erro ao excuir.<i (click)="fechar()" class="fa-solid fa-rectangle-xmark fs-1 float-end" style="cursor: pointer;"></i></div>
+  </div>
+
+
+
+
+

@@ -1,0 +1,271 @@
+<app-navbar></app-navbar>
+<div class="container w-100 my-5">
+  <h3 class="text-center title mt-5 mb-3">
+    Cadastrar Contra Cheque:
+    <span class="bg-success rounded-3 p-2 text-warning fw-bold">{{
+      this.nomeFunc
+    }}</span>
+  </h3>
+  <div class="card">
+    <form class="p-3" #f="ngForm" (ngSubmit)="cadastrarContraCheque(f.value)">
+      <div class="row">
+        <div class="col col-lg-6 col-md-12">
+          <div class="mb-3">
+            <label class="form-label">Descrição</label>
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="cc.cc_descricao"
+              name="cc_descricao"
+              #cc_descricao="ngModel"
+              ng-trim="false"
+              maxlength="100"
+              required
+            />
+            <span class="float-end fs-6 text-success"
+              >Restam {{ 100 - cc.cc_descricao.length }} caracters</span
+            >
+            <div class="text-danger fs-6">
+              <span *ngIf="cc_descricao.errors?.['required']"
+                >*Campo obrigatório</span
+              >
+            </div>
+          </div>
+        </div>
+        <div class="col col-lg-6 col-md-12">
+          <div class="mb-3">
+            <label class="form-label">PIS</label>
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="cc.cc_pis"
+              name="cc_pis"
+              #cc_pis="ngModel"
+              minlength="11"
+              maxlength="11"
+              required
+              placeholder="Só digite números"
+            />
+            <div class="text-danger fs-6">
+              <span *ngIf="cc_pis.errors?.['required']"
+                >*Campo obrigatório</span
+              >
+              <span *ngIf="cc_pis.errors?.['minlength']"
+                >O PIS é composto por 11 dígitos</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col col-lg-6 col-md-12">
+          <label class="form-label">Data de Admissão</label>
+          <input
+            type="date"
+            class="form-control"
+            [(ngModel)]="cc.cc_dataAdmissao"
+            name="cc_dataAdmissao"
+            #cc_dataAdmissao="ngModel"
+            required
+          />
+          <div class="text-danger fs-6">
+            <span *ngIf="cc_dataPagamento.errors?.['required']"
+              >*Campo obrigatório</span
+            >
+          </div>
+        </div>
+        <div class="col col-lg-6 col-md-12">
+          <div class="mb-3">
+            <label class="form-label">Data de Pagamento</label>
+            <input
+              type="date"
+              class="form-control"
+              [(ngModel)]="cc.cc_dataPagamento"
+              name="cc_dataPagamento"
+              #cc_dataPagamento="ngModel"
+            />
+            <div class="text-danger fs-6">
+              <span *ngIf="cc_dataPagamento.errors?.['required']"
+                >*Campo obrigatório</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col col-lg-4 col-md-12">
+          <div class="mb-3">
+            <label class="form-label">Bonificação</label>
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="cc.cc_bonificacao"
+              name="cc_bonificacao"
+              currencyMask
+              [options]="{
+                prefix: 'R$',
+                thousands: '.',
+                decimal: ',',
+                align: 'left'
+              }"
+              #cc_bonificacao="ngModel"
+              required
+            />
+            <div class="text-danger fs-6">
+              <span *ngIf="cc_bonificacao.errors?.['required']"
+                >*Campo obrigatório</span
+              >
+            </div>
+          </div>
+        </div>
+        <div class="col col-lg-4 col-md-12">
+          <div class="mb-3">
+            <label class="form-label">Auxílio Transporte</label>
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="cc.cc_auxilioTransporte"
+              name="cc_auxilioTransporte"
+              currencyMask
+              [options]="{
+                prefix: 'R$',
+                thousands: '.',
+                decimal: ',',
+                align: 'left'
+              }"
+              #cc_auxilioTransporte="ngModel"
+              required
+            />
+            <div class="text-danger fs-6">
+              <span *ngIf="cc_auxilioTransporte.errors?.['required']"
+                >*Campo obrigatório</span
+              >
+            </div>
+          </div>
+        </div>
+        <div class="col col-lg-4 col-md-12">
+          <div class="mb-3">
+            <label class="form-label">Auxílio Alimentação</label>
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="cc.cc_auxilioAlimentacao"
+              name="cc_auxilioAlimentacao"
+              currencyMask
+              [options]="{
+                prefix: 'R$',
+                thousands: '.',
+                decimal: ',',
+                align: 'left'
+              }"
+              #cc_auxilioAlimentacao="ngModel"
+              required
+            />
+            <div class="text-danger fs-6">
+              <span *ngIf="cc_auxilioAlimentacao.errors?.['required']"
+                >*Campo obrigatório</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col col-lg-4 col-md-12">
+          <div class="mb-3">
+            <label class="form-label">Salário Bruto</label>
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="cc.cc_valor"
+              name="cc.cc_valor"
+              currencyMask
+              [options]="{
+                prefix: 'R$',
+                thousands: '.',
+                decimal: ',',
+                align: 'left'
+              }"
+              #cc_valor="ngModel"
+              required
+            />
+            <div class="text-danger fs-6">
+              <span *ngIf="cc_valor.errors?.['required']"
+                >*Campo obrigatório</span
+              >
+            </div>
+          </div>
+        </div>
+        <div class="col col-lg-4 col-md-12">
+          <div class="mb-3">
+            <label class="form-label">Salário Líquido</label>
+            <input
+              type="text"
+              class="form-control"
+              readonly
+              [(ngModel)]="cc.cc_total"
+              name="cc.cc_total"
+              currencyMask
+              [options]="{
+                prefix: 'R$',
+                thousands: '.',
+                decimal: ',',
+                align: 'left'
+              }"
+              #cc_total="ngModel"
+            />
+          </div>
+        </div>
+        <div class="mb-3 col col-lg-4 col-md-12">
+          <label class="form-label">Status do Pagamento</label>
+          <input
+            type="text"
+            readonly
+            class="form-control"
+            value="PENDENTE"
+            name="cc_statusPagamento"
+          />
+        </div>
+      </div>
+      <div class="mt-3">
+        <button
+          #cadastrar
+          class="btn btn-success me-3"
+          [disabled]="!f.valid"
+        >
+          Cadastrar
+        </button>
+        <button type="reset" class="btn btn-dark me-3">Limpar</button>
+        <button
+          routerLink="/listarContraCheque/{{ id_funcionario }}"
+          class="btn btn-dark"
+        >
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="fixed-top">
+  <div
+    *ngIf="cadastrado"
+    class="alert alert-success w-75 text-center m-auto"
+    role="alert"
+  >
+    Contra Cheque Cadastrado!<i
+      (click)="fechar()"
+      class="fa-solid fa-rectangle-xmark fs-1 float-end"
+      style="cursor: pointer"
+    ></i>
+  </div>
+  <div
+    *ngIf="error"
+    class="alert alert-danger w-75 text-center m-auto"
+    role="alert"
+  >
+    Erro!Não foi possível cadastrar este contra cheque.<i
+      (click)="fechar()"
+      class="fa-solid fa-rectangle-xmark fs-1 float-end"
+      style="cursor: pointer"
+    ></i>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+.fas{
+  width: 25px;
+}
+
+.bg{
+  background-color: var(--color1);
+}
+
+.nav-item .nav-link {
+  color: #fff;
+}
+marquee{
+  color: var(--color2);
+}
+
+@media only screen and (max-width: 1024px) {
+  marquee{
+    width: 200px;
+  }
+}

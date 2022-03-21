@@ -1,0 +1,37 @@
+<app-navbar></app-navbar>
+<div class="container w-50 my-5">
+  <h3 class="text-center my-3">Cadastrar Cargo</h3>
+  <div class="card">
+  <form class="p-3" #f="ngForm" (ngSubmit)="cadastrarCargo(f.value)">
+    <div class="mb-3">
+        <label class="form-label">Nome</label>
+        <input type="text" class="form-control" id="ca_nome" [(ngModel)]="cargo.ca_nome" name="ca_nome" maxlength="100" minlength="3" #ca_nome="ngModel" required>
+        <div class="text-danger fs-6">
+          <span *ngIf="ca_nome.errors?.['required']">*Campo obrigatório</span>
+          <span *ngIf="ca_nome.errors?.['minlength']">Mínimo 3 caracteres</span>
+          <span *ngIf="ca_nome.errors?.['maxlength']">Máximo 100 caracteres</span>
+        </div>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Atribuição</label>
+        <input type="text" class="form-control" id="ca_atribuicao"  [(ngModel)] ="cargo.ca_atribuicao"  name = "ca_atribuicao" maxlength="200" #ca_atribuicao="ngModel" ng-trim="false" required>
+        <span class="float-end fs-6 text-success">Restam {{200 - cargo.ca_atribuicao.length}} caracters</span>
+        <div class="text-danger fs-6">
+          <span *ngIf="ca_nome.errors?.['required']">*Campo obrigatório</span>
+        </div>
+    </div>
+    <div cals="mt-3">
+      <button  class="btn btn-success me-3" [disabled]="!f.valid">Cadastrar</button>
+      <button type="reset" class="btn btn-dark me-3">Limpar</button>
+      <button  routerLink="/listarCargos"class="btn btn-dark">Cancelar</button>
+    </div>
+  </form>
+  </div>
+</div>
+
+<div class="fixed-top">
+  <div *ngIf="cadastrado" class="alert alert-success w-75 text-center m-auto" role="alert">Cargo Cadastrado!<i (click)="fechar()" class="fa-solid fa-rectangle-xmark fs-1 float-end" style="cursor: pointer;"></i></div>
+<div *ngIf="error" class="alert alert-danger w-75 text-center m-auto" role="alert">Erro!Não foi possível cadastrar este cargo.<i (click)="fechar()" class="fa-solid fa-rectangle-xmark fs-1 float-end" style="cursor: pointer;"></i></div>
+</div>
+
+

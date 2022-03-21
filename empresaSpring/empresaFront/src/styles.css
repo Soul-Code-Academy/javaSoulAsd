@@ -1,0 +1,152 @@
+/* angular-cli file: src/styles.css */
+@import "../node_modules/angular-calendar/css/angular-calendar.css";
+
+:root {
+  --color1: #007849;
+  --color2: #FFCE00;
+  --color3: #ffcc001f;
+  --color4: #fff;
+  --fontSize1: 22px;
+  --fontSize2: 18px;
+  --fontSize3: 12px;
+
+}
+
+body{
+  font-family: 'Nunito', sans-serif;
+  /* box-shadow: 6px 6px 20px #0b827e, -6px -6px 20px #0b827e; */
+  background: #f0f0f0;
+  padding-top: 5rem;
+
+}
+
+form{
+  font-size: var(--fontSize1);
+}
+
+.table{
+  text-align: center;
+  font-size: var(--fontSize1);
+}
+
+
+.card{
+  box-shadow: 6px 6px 20px #0b827e, -6px -6px 30px #0b827e;
+  border-radius:10px;
+}
+.btn{
+  color: var(--color2);
+  font-weight: bold;
+}
+
+
+
+.myModal{
+  width: 300px;
+  height: auto;
+  border: 3px solid var(--color1);
+  border-radius: 10px;
+  background-color: var(--color1);
+  text-align: center;
+  position: fixed;
+  top: 30%;
+  left: 25%;
+
+}
+
+.tituloModal{
+  color: var(--color2);
+}
+
+.btn-modal{
+  border: 3px solid var(--color1);
+  background: var(--color2);
+  color: var(--color1);
+  border-radius:10px;
+}
+
+
+
+
+
+.search-box {
+  border: solid 3px #0b827e;
+  display: inline-block;
+  position: relative;
+  border-radius: 10px;
+}
+.search-box input[type="text"] {
+  font-size: 15px;
+  width: 20px;
+  height: 20px;
+  padding: 3px 20px 3px 5px;
+  border: none;
+  box-sizing: border-box;
+  border-radius: 10px;
+  transition: width 800ms cubic-bezier(0.68, -0.55, 0.27, 1.55) 150ms;
+}
+.search-box input[type="text"]:focus {
+  outline: none;
+}
+.search-box input[type="text"]:focus, .search-box input[type="text"]:not(:placeholder-shown) {
+  width: 250px;
+  transition: width 800ms cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+.search-box input[type="text"]:focus + button[type="reset"], .search-box input[type="text"]:not(:placeholder-shown) + button[type="reset"] {
+  bottom: 4px;
+  right: 10px;
+  transition: bottom 150ms ease-out 800ms, right 150ms ease-out 800ms;
+}
+.search-box input[type="text"]:focus + button[type="reset"]:after, .search-box input[type="text"]:not(:placeholder-shown) + button[type="reset"]:after {
+  top: 0px;
+  right: 7px;
+  opacity: 1;
+  transition: top 150ms ease-out 950ms, right 150ms ease-out 950ms, opacity 150ms ease 950ms;
+}
+.search-box button[type="reset"] {
+  background-color: transparent;
+  width: 16px;
+  height: 16px;
+  border: 0;
+  padding: 0;
+  outline: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: -11px;
+  right: -11px;
+  transition: bottom 150ms ease-out 150ms, right 150ms ease-out 150ms;
+}
+.search-box button[type="reset"]:before, .search-box button[type="reset"]:after {
+  content: "";
+  height: 15px;
+  border-left: solid 3px #0b827e;
+  position: absolute;
+  transform: rotate(-45deg);
+}
+.search-box button[type="reset"]:after {
+  transform: rotate(45deg);
+  opacity: 0;
+  top: -20px;
+  right: -10px;
+  transition: top 150ms ease-out, right 150ms ease-out, opacity 150ms ease-out;
+}
+
+
+
+@media only screen and (max-width: 900px) {
+
+  .w-50, .w-25, .w-25, .btn {
+    width: 100%!important;
+}
+
+
+  .btn{
+    margin-top: 1rem;
+    width: 100% !important;
+  }
+
+}
+
+
